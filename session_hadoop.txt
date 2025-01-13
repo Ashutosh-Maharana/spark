@@ -1,0 +1,537 @@
+Script started on Mon 13 Jan 2025 12:14:12 AM EST
+]0;itv011398@g02:~[?1034h[itv011398@g02 ~]$ [K[itv011398@g02 ~]$ [K[itv011398@g02 ~]$ pwd
+/home/itv011398
+]0;itv011398@g02:~[itv011398@g02 ~]$ cd ~
+]0;itv011398@g02:~[itv011398@g02 ~]$ echo $home
+
+]0;itv011398@g02:~[itv011398@g02 ~]$ cd ~
+]0;itv011398@g02:~[itv011398@g02 ~]$ pwd
+/home/itv011398
+]0;itv011398@g02:~[itv011398@g02 ~]$ mkdir landing
+]0;itv011398@g02:~[itv011398@g02 ~]$ mkdir staging
+]0;itv011398@g02:~[itv011398@g02 ~]$ ls
+[0m[01;34mlanding[0m  [01;34mproduct[0m  session_hadoop.log  [01;34mstaging[0m
+]0;itv011398@g02:~[itv011398@g02 ~]$ cp /data/retail_db/orders/part-00000 landing
+]0;itv011398@g02:~[itv011398@g02 ~]$ cd /landing
+bash: cd: /landing: No such file or directory
+]0;itv011398@g02:~[itv011398@g02 ~]$ cd /landing[1Planding
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ ls
+part-00000
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ head part-00000
+1,2013-07-25 00:00:00.0,11599,CLOSED
+2,2013-07-25 00:00:00.0,256,PENDING_PAYMENT
+3,2013-07-25 00:00:00.0,12111,COMPLETE
+4,2013-07-25 00:00:00.0,8827,CLOSED
+5,2013-07-25 00:00:00.0,11318,COMPLETE
+6,2013-07-25 00:00:00.0,7130,COMPLETE
+7,2013-07-25 00:00:00.0,4530,COMPLETE
+8,2013-07-25 00:00:00.0,2911,PROCESSING
+9,2013-07-25 00:00:00.0,5657,PENDING_PAYMENT
+10,2013-07-25 00:00:00.0,5648,PENDING_PAYMENT
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ grep PENDING_PAYMENT part-00000 | head
+2,2013-07-25 00:00:00.0,256,PENDING_PAYMENT
+9,2013-07-25 00:00:00.0,5657,PENDING_PAYMENT
+10,2013-07-25 00:00:00.0,5648,PENDING_PAYMENT
+13,2013-07-25 00:00:00.0,9149,PENDING_PAYMENT
+16,2013-07-25 00:00:00.0,7276,PENDING_PAYMENT
+19,2013-07-25 00:00:00.0,9488,PENDING_PAYMENT
+23,2013-07-25 00:00:00.0,4367,PENDING_PAYMENT
+27,2013-07-25 00:00:00.0,3241,PENDING_PAYMENT
+30,2013-07-25 00:00:00.0,10039,PENDING_PAYMENT
+33,2013-07-25 00:00:00.0,5793,PENDING_PAYMENT
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ grep PENDING_PAYMENT part-00000 | head[K[K[K[K[K[K[K >> /home//home/itv011398[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K/home/itv011398/staging/orders_filter ed.csv
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ cd [K[K[K/home/itv011398/staging/orders_filtered.csv[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Khead /home/itv011398/staging/orders_filtered.csv
+2,2013-07-25 00:00:00.0,256,PENDING_PAYMENT
+9,2013-07-25 00:00:00.0,5657,PENDING_PAYMENT
+10,2013-07-25 00:00:00.0,5648,PENDING_PAYMENT
+13,2013-07-25 00:00:00.0,9149,PENDING_PAYMENT
+16,2013-07-25 00:00:00.0,7276,PENDING_PAYMENT
+19,2013-07-25 00:00:00.0,9488,PENDING_PAYMENT
+23,2013-07-25 00:00:00.0,4367,PENDING_PAYMENT
+27,2013-07-25 00:00:00.0,3241,PENDING_PAYMENT
+30,2013-07-25 00:00:00.0,10039,PENDING_PAYMENT
+33,2013-07-25 00:00:00.0,5793,PENDING_PAYMENT
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ hadoop fs -ls
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ hadoop fs -mkdir -p - [K[Kdata/landing
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ hadoop fs -mkdir -p data/landing[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kls -r
+ERROR: ls is not COMMAND nor fully qualified CLASSNAME.
+Usage: hadoop [OPTIONS] SUBCOMMAND [SUBCOMMAND OPTIONS]
+ or    hadoop [OPTIONS] CLASSNAME [CLASSNAME OPTIONS]
+  where CLASSNAME is a user-provided Java class
+
+  OPTIONS is none or any of:
+
+buildpaths                       attempt to add class files from build tree
+--config dir                     Hadoop config directory
+--debug                          turn on shell script debug mode
+--help                           usage information
+hostnames list[,of,host,names]   hosts to use in slave mode
+hosts filename                   list of hosts to use in slave mode
+loglevel level                   set the log4j level for this command
+workers                          turn on worker mode
+
+  SUBCOMMAND is one of:
+
+
+    Admin Commands:
+
+daemonlog     get/set the log level for each daemon
+
+    Client Commands:
+
+archive       create a Hadoop archive
+checknative   check native Hadoop and compression libraries availability
+classpath     prints the class path needed to get the Hadoop jar and the required libraries
+conftest      validate configuration XML files
+credential    interact with credential providers
+distch        distributed metadata changer
+distcp        copy file or directories recursively
+dtutil        operations related to delegation tokens
+envvars       display computed Hadoop environment variables
+fs            run a generic filesystem user client
+gridmix       submit a mix of synthetic job, modeling a profiled from production load
+jar <jar>     run a jar file. NOTE: please use "yarn jar" to launch YARN applications, not
+              this command.
+jnipath       prints the java.library.path
+kdiag         Diagnose Kerberos Problems
+kerbname      show auth_to_local principal conversion
+key           manage keys via the KeyProvider
+rumenfolder   scale a rumen input trace
+rumentrace    convert logs into a rumen trace
+s3guard       manage metadata on S3
+trace         view and modify Hadoop tracing settings
+version       print the version
+
+    Daemon Commands:
+
+kms           run KMS, the Key Management Server
+registrydns   run the registry DNS server
+
+SUBCOMMAND may print help when invoked w/o parameters or with -h.
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ hadoop ls -r[C[1@ [1@f[1@s[C[1@ [1@-[C[1P
+Found 1 items
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:21 data
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ hadoop fs -put /home/itv011398/staging/orders_filtered.csv data[K[K[K[K/data/lanf[Kding [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kg
+put: `/data/landing': No such file or directory: `hdfs://m01.itversity.com:9000/data/landing'
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ hadoop fs -put /home/itv011398/staging/orders_filtered.csv /data/landing [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pdata/landing
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+]0;itv011398@g02:~/landing[itv011398@g02 landing]$ cd ~
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadop[Kop fs -ls -r data/landing
+Found 1 items
+-rw-r--r--   3 itv011398 supergroup     735626 2025-01-13 00:22 data/landing/orders_filtered.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -cat data/landing/orders_filtered.csv | wc -l
+15030
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls data/landing9[C[C[C[C data/landing9- data/landing9h data/landing9[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+Found 1 items
+-rw-r--r--   3 itv011398 supergroup    718.4 K 2025-01-13 00:22 data/landing/orders_filtered.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls -h data/landing[C[C-data/landingsdata/landing data/landing
+-ls: Illegal option -s
+Usage: hadoop fs [generic options]
+	[-appendToFile <localsrc> ... <dst>]
+	[-cat [-ignoreCrc] <src> ...]
+	[-checksum [-v] <src> ...]
+	[-chgrp [-R] GROUP PATH...]
+	[-chmod [-R] <MODE[,MODE]... | OCTALMODE> PATH...]
+	[-chown [-R] [OWNER][:[GROUP]] PATH...]
+	[-copyFromLocal [-f] [-p] [-l] [-d] [-t <thread count>] <localsrc> ... <dst>]
+	[-copyToLocal [-f] [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-count [-q] [-h] [-v] [-t [<storage type>]] [-u] [-x] [-e] <path> ...]
+	[-cp [-f] [-p | -p[topax]] [-d] <src> ... <dst>]
+	[-createSnapshot <snapshotDir> [<snapshotName>]]
+	[-deleteSnapshot <snapshotDir> <snapshotName>]
+	[-df [-h] [<path> ...]]
+	[-du [-s] [-h] [-v] [-x] <path> ...]
+	[-expunge [-immediate] [-fs <path>]]
+	[-find <path> ... <expression> ...]
+	[-get [-f] [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-getfacl [-R] <path>]
+	[-getfattr [-R] {-n name | -d} [-e en] <path>]
+	[-getmerge [-nl] [-skip-empty-file] <src> <localdst>]
+	[-head <file>]
+	[-help [cmd ...]]
+	[-ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [-e] [<path> ...]]
+	[-mkdir [-p] <path> ...]
+	[-moveFromLocal <localsrc> ... <dst>]
+	[-moveToLocal <src> <localdst>]
+	[-mv <src> ... <dst>]
+	[-put [-f] [-p] [-l] [-d] <localsrc> ... <dst>]
+	[-renameSnapshot <snapshotDir> <oldName> <newName>]
+	[-rm [-f] [-r|-R] [-skipTrash] [-safely] <src> ...]
+	[-rmdir [--ignore-fail-on-non-empty] <dir> ...]
+	[-setfacl [-R] [{-b|-k} {-m|-x <acl_spec>} <path>]|[--set <acl_spec> <path>]]
+	[-setfattr {-n name [-v value] | -x name} <path>]
+	[-setrep [-R] [-w] <rep> <path> ...]
+	[-stat [format] <path> ...]
+	[-tail [-f] [-s <sleep interval>] <file>]
+	[-test -[defswrz] <path>]
+	[-text [-ignoreCrc] <src> ...]
+	[-touch [-a] [-m] [-t TIMESTAMP ] [-c] <path> ...]
+	[-touchz <path> ...]
+	[-truncate [-w] <length> <path> ...]
+	[-usage [cmd ...]]
+
+Generic options supported are:
+-conf <configuration file>        specify an application configuration file
+-D <property=value>               define a value for a given property
+-fs <file:///|hdfs://namenode:port> specify default filesystem URL to use, overrides 'fs.defaultFS' property from configurations.
+-jt <local|resourcemanager:port>  specify a ResourceManager
+-files <file1,...>                specify a comma-separated list of files to be copied to the map reduce cluster
+-libjars <jar1,...>               specify a comma-separated list of jar files to be included in the classpath
+-archives <archive1,...>          specify a comma-separated list of archives to be unarchived on the compute machines
+
+The general command line syntax is:
+command [genericOptions] [commandOptions]
+
+Usage: hadoop fs [generic options] -ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [-e] [<path> ...]
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls -h -s data/landing[C[1P data/landingS data/landing
+Found 1 items
+-rw-r--r--   3 itv011398 supergroup    718.4 K 2025-01-13 00:22 data/landing/orders_filtered.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadop[Kop fs -chmod 764 dt[K[Kdata/landing/orders_filtered.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -chmod 764 data/landing/orders_filtered.csv[C[C[C[1P data/landing/orders_filtered.csv[1P data/landing/orders_filtered.csv[1P data/landing/orders_filtered.csv[1Pdata/landing/orders_filtered.csv[1P data/landing/orders_filtered.csv[1P data/landing/orders_filtered.csv[1P data/landing/orders_filtered.csv[1P data/landing/orders_filtered.csv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P data/landing/orders_filtered.csv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P data/landing/orders_filtered.csv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C- data/landing/orders_filtered.csv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl data/landing/orders_filtered.csv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cs data/landing/orders_filtered.csv[C data/landing/orders_filtered.csv- data/landing/orders_filtered.csvh data/landing/orders_filtered.csv
+-rwxrw-r--   3 itv011398 supergroup    718.4 K 2025-01-13 00:22 data/landing/orders_filtered.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls -h data/landing/orders_filtered.csv[C[1P data/landing/orders_filtered.csv[1P data/landing/orders_filtered.csv[1Pdata/landing/orders_filtered.csv[1P data/landing/orders_filtered.csv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P data/landing/orders_filtered.csv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cm data/landing/orders_filtered.csv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ck data/landing/orders_filtered.csvd data/landing/orders_filtered.csvi data/landing/orders_filtered.csvt data/landing/orders_filtered.csv[1P data/landing/orders_filtered.csvr data/landing/orders_filtered.csv
+mkdir: `data/landing/orders_filtered.csv': Is not a directory
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -mkdir data/landing/orders_filtered.csv[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kstaging
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -mkdir data/staging[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kv data/landing/orders_filtered.csv data/staging
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -mv data/landing/orders_filtered.csv data/staging[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kls -h data/staging
+Found 1 items
+-rwxrw-r--   3 itv011398 supergroup    718.4 K 2025-01-13 00:22 data/staging/orders_filtered.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ vi order_result.csv
+[?1049h[?1h=[2;1H▽[6n[2;1H  [1;1H]11;?[1;52r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[52;1H"order_result.csv" [New File][>c[2;1H[1m[34m~                                                                                                [3;1H~                                                                                                [4;1H~                                                                                                [5;1H~                                                                                                [6;1H~                                                                                                [7;1H~                                                                                                [8;1H~                                                                                                [9;1H~                                                                                                [10;1H~                                                                                                [11;1H~                                                                                                [12;1H~                                                                                                [13;1H~                                                                                                [14;1H~                                                                                                [15;1H~                                                                                                [16;1H~                                                                                                [17;1H~                                                                                                [18;1H~                                                                                                [19;1H~                                                                                                [20;1H~                                                                                                [21;1H~                                                                                                [22;1H~                                                                                                [23;1H~                                                                                                [24;1H~                                                                                                [25;1H~                                                                                                [26;1H~                                                                                                [27;1H~                                                                                                [28;1H~                                                                                                [29;1H~                                                                                                [30;1H~                                                                                                [31;1H~                                                                                                [32;1H~                                                                                                [33;1H~                                                                                                [34;1H~                                                                                                [35;1H~                                                                                                [36;1H~                                                                                                [37;1H~                                                                                                [38;1H~                                                                                                [39;1H~                                                                                                [40;1H~                                                                                                [41;1H~                                                                                                [42;1H~                                                                                                [43;1H~                                                                                                [44;1H~                                                                                                [45;1H~                                                                                                [46;1H~                                                                                                [47;1H~                                                                                                [48;1H~                                                                                                [49;1H~                                                                                                [50;1H~                                                                                                [51;1H~                                                                                                [m[52;80H0,0-1[9CAll[1;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[52;1H[1m-- INSERT --[m[52;13H[K[52;80H0,1[11CAll[1;1H[?12l[?25h[?25li[52;80H1,2[1;2H[?12l[?25h[?25l[1;1H[K[52;82H1[1;1H[?12l[?25h[?25l3617,2013-08-1500:00:00.0,8889,PENDING_PAYMENT68714,2013-09-0600:00:00.0,8889,PENDING_PAYMENT[52;82H94[1;94H[?12l[?25h[?25l[52;83H3[1;93H[?12l[?25h[?25l[52;83H2[1;92H[?12l[?25h[?25l[52;83H1[1;91H[?12l[?25h[?25l[52;83H0[1;90H[?12l[?25h[?25l[52;82H89[1;89H[?12l[?25h[?25l[52;83H8[1;88H[?12l[?25h[?25l[52;83H7[1;87H[?12l[?25h[?25l[52;83H6[1;86H[?12l[?25h[?25l[52;83H5[1;85H[?12l[?25h[?25l[52;83H4[1;84H[?12l[?25h[?25l[52;83H3[1;83H[?12l[?25h[?25l[52;83H2[1;82H[?12l[?25h[?25l[52;83H1[1;81H[?12l[?25h[?25l[52;83H0[1;80H[?12l[?25h[?25l[52;82H79[1;79H[?12l[?25h[?25l[52;83H8[1;78H[?12l[?25h[?25l[52;83H7[1;77H[?12l[?25h[?25l[52;83H6[1;76H[?12l[?25h[?25l[52;83H5[1;75H[?12l[?25h[?25l[52;83H4[1;74H[?12l[?25h[?25l[52;83H3[1;73H[?12l[?25h[?25l[52;83H2[1;72H[?12l[?25h[?25l[52;83H1[1;71H[?12l[?25h[?25l[52;83H0[1;70H[?12l[?25h[?25l[52;82H69[1;69H[?12l[?25h[?25l[52;83H8[1;68H[?12l[?25h[?25l[52;83H7[1;67H[?12l[?25h[?25l[52;83H6[1;66H[?12l[?25h[?25l[52;83H5[1;65H[?12l[?25h[?25l[52;83H4[1;64H[?12l[?25h[?25l[52;83H3[1;63H[?12l[?25h[?25l[52;83H2[1;62H[?12l[?25h[?25l[52;83H1[1;61H[?12l[?25h[?25l[52;83H0[1;60H[?12l[?25h[?25l[52;82H59[1;59H[?12l[?25h[?25l[52;83H8[1;58H[?12l[?25h[?25l[52;83H7[1;57H[?12l[?25h[?25l[52;83H6[1;56H[?12l[?25h[?25l[52;83H5[1;55H[?12l[?25h[?25l[52;83H4[1;54H[?12l[?25h[?25l[52;83H3[1;53H[?12l[?25h[?25l[52;83H2[1;52H[?12l[?25h[?25l[52;83H1[1;51H[?12l[?25h[?25l[52;83H0[1;50H[?12l[?25h[?25l[52;82H49[1;49H[?12l[?25h[?25l[52;83H8[1;48H[?12l[?25h[?25l[52;83H7[1;47H[?12l[?25h[?25l[52;83H6[1;46H[?12l[?25h[?25l[52;83H7[1;47H[?12l[?25h[?25l[1;47H[K[2;1H68714,2013-09-0600:00:00.0,8889,PENDING_PAYMENT[2;48H[K[52;80H2,1 [2;1H[?12l[?25h[?25l[52;82H2[2;2H[?12l[?25h[?25l[52;82H3[2;3H[?12l[?25h[?25l[52;82H4[2;4H[?12l[?25h[?25l[52;82H5[2;5H[?12l[?25h[?25l[52;82H6[2;6H[?12l[?25h[?25l[52;82H7[2;7H[?12l[?25h[?25l[52;82H8[2;8H[?12l[?25h[?25l[52;82H9[2;9H[?12l[?25h[?25l[52;82H10[2;10H[?12l[?25h[?25l[52;83H1[2;11H[?12l[?25h[?25l[52;83H2[2;12H[?12l[?25h[?25l[52;83H3[2;13H[?12l[?25h[?25l[52;83H4[2;14H[?12l[?25h[?25l[52;83H5[2;15H[?12l[?25h[?25l[52;83H6[2;16H[?12l[?25h[?25l[52;83H7[2;17H[?12l[?25h[?25l[52;83H9[2;19H[?12l[?25h[?25l[52;82H20[2;20H[?12l[?25h[?25l[52;83H1[2;21H[?12l[?25h[?25l[52;83H2[2;22H[?12l[?25h[?25l[52;83H3[2;23H[?12l[?25h[?25l[52;83H4[2;24H[?12l[?25h[?25l[52;83H5[2;25H[?12l[?25h[?25l[52;83H6[2;26H[?12l[?25h[?25l[52;83H7[2;27H[?12l[?25h[?25l[52;83H8[2;28H[?12l[?25h[?25l[52;83H9[2;29H[?12l[?25h[?25l[52;82H30[2;30H[?12l[?25h[?25l[52;83H1[2;31H[?12l[?25h[?25l[52;83H2[2;32H[?12l[?25h[?25l[52;83H3[2;33H[?12l[?25h[?25l[52;83H4[2;34H[?12l[?25h[?25l[52;83H5[2;35H[?12l[?25h[?25l[52;83H6[2;36H[?12l[?25h[?25l[52;83H7[2;37H[?12l[?25h[?25l[52;83H8[2;38H[?12l[?25h[?25l[52;83H9[2;39H[?12l[?25h[?25l[52;82H40[2;40H[?12l[?25h[?25l[52;83H1[2;41H[?12l[?25h[?25l[52;83H2[2;42H[?12l[?25h[?25l[52;83H3[2;43H[?12l[?25h[?25l[52;83H4[2;44H[?12l[?25h[?25l[52;83H5[2;45H[?12l[?25h[?25l[52;83H6[2;46H[?12l[?25h[?25l[52;83H7[2;47H[?12l[?25h[?25l[52;83H8[2;48H[?12l[?25h[52;1H[K[2;47H[?25l[52;80H2,47[10CAll[2;47H[?12l[?25h[?25l[52;80H[K[52;1H:[?12l[?25hw[?25l[?12l[?25hq[?25l[?12l[?25h[?25l"order_result.csv" [New] 2L, 95C written
+[?1l>[?12l[?25h[?1049l]0;itv011398@g02:~[itv011398@g02 ~]$ cat order_result.csv
+3617,2013-08-1500:00:00.0,8889,PENDING_PAYMENT
+68714,2013-09-0600:00:00.0,8889,PENDING_PAYMENT
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -put order_res[Ksult.csv data/results
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -put order_result.csv data/resultsls -h[K[K[K[K[K[C[C[1P[1P[1P[1@l[1@s[C[1@ [1@-[1@h
+ls: `order_result.csv': No such file or directory
+-rw-r--r--   3 itv011398 supergroup         95 2025-01-13 00:31 data/results
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls -h order_result.csv data/results[C[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1Pdata/results[C data/results- data/resultsr data/results
+-rw-r--r--   3 itv011398 supergroup         95 2025-01-13 00:31 data/results
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls -h -r data/results[C[C[1P data/resultsR data/results
+-rw-r--r--   3 itv011398 supergroup         95 2025-01-13 00:31 data/results
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls -h -R data/results[C[C[C[1P data/resultsl data/resultsr data/results
+-ls: Illegal option -lr
+Usage: hadoop fs [generic options]
+	[-appendToFile <localsrc> ... <dst>]
+	[-cat [-ignoreCrc] <src> ...]
+	[-checksum [-v] <src> ...]
+	[-chgrp [-R] GROUP PATH...]
+	[-chmod [-R] <MODE[,MODE]... | OCTALMODE> PATH...]
+	[-chown [-R] [OWNER][:[GROUP]] PATH...]
+	[-copyFromLocal [-f] [-p] [-l] [-d] [-t <thread count>] <localsrc> ... <dst>]
+	[-copyToLocal [-f] [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-count [-q] [-h] [-v] [-t [<storage type>]] [-u] [-x] [-e] <path> ...]
+	[-cp [-f] [-p | -p[topax]] [-d] <src> ... <dst>]
+	[-createSnapshot <snapshotDir> [<snapshotName>]]
+	[-deleteSnapshot <snapshotDir> <snapshotName>]
+	[-df [-h] [<path> ...]]
+	[-du [-s] [-h] [-v] [-x] <path> ...]
+	[-expunge [-immediate] [-fs <path>]]
+	[-find <path> ... <expression> ...]
+	[-get [-f] [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-getfacl [-R] <path>]
+	[-getfattr [-R] {-n name | -d} [-e en] <path>]
+	[-getmerge [-nl] [-skip-empty-file] <src> <localdst>]
+	[-head <file>]
+	[-help [cmd ...]]
+	[-ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [-e] [<path> ...]]
+	[-mkdir [-p] <path> ...]
+	[-moveFromLocal <localsrc> ... <dst>]
+	[-moveToLocal <src> <localdst>]
+	[-mv <src> ... <dst>]
+	[-put [-f] [-p] [-l] [-d] <localsrc> ... <dst>]
+	[-renameSnapshot <snapshotDir> <oldName> <newName>]
+	[-rm [-f] [-r|-R] [-skipTrash] [-safely] <src> ...]
+	[-rmdir [--ignore-fail-on-non-empty] <dir> ...]
+	[-setfacl [-R] [{-b|-k} {-m|-x <acl_spec>} <path>]|[--set <acl_spec> <path>]]
+	[-setfattr {-n name [-v value] | -x name} <path>]
+	[-setrep [-R] [-w] <rep> <path> ...]
+	[-stat [format] <path> ...]
+	[-tail [-f] [-s <sleep interval>] <file>]
+	[-test -[defswrz] <path>]
+	[-text [-ignoreCrc] <src> ...]
+	[-touch [-a] [-m] [-t TIMESTAMP ] [-c] <path> ...]
+	[-touchz <path> ...]
+	[-truncate [-w] <length> <path> ...]
+	[-usage [cmd ...]]
+
+Generic options supported are:
+-conf <configuration file>        specify an application configuration file
+-D <property=value>               define a value for a given property
+-fs <file:///|hdfs://namenode:port> specify default filesystem URL to use, overrides 'fs.defaultFS' property from configurations.
+-jt <local|resourcemanager:port>  specify a ResourceManager
+-files <file1,...>                specify a comma-separated list of files to be copied to the map reduce cluster
+-libjars <jar1,...>               specify a comma-separated list of jar files to be included in the classpath
+-archives <archive1,...>          specify a comma-separated list of archives to be unarchived on the compute machines
+
+The general command line syntax is:
+command [genericOptions] [commandOptions]
+
+Usage: hadoop fs [generic options] -ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [-e] [<path> ...]
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls -h -lr data/results[1@t[Cr data/results[1P data/results
+-ls: Illegal option -ltr
+Usage: hadoop fs [generic options]
+	[-appendToFile <localsrc> ... <dst>]
+	[-cat [-ignoreCrc] <src> ...]
+	[-checksum [-v] <src> ...]
+	[-chgrp [-R] GROUP PATH...]
+	[-chmod [-R] <MODE[,MODE]... | OCTALMODE> PATH...]
+	[-chown [-R] [OWNER][:[GROUP]] PATH...]
+	[-copyFromLocal [-f] [-p] [-l] [-d] [-t <thread count>] <localsrc> ... <dst>]
+	[-copyToLocal [-f] [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-count [-q] [-h] [-v] [-t [<storage type>]] [-u] [-x] [-e] <path> ...]
+	[-cp [-f] [-p | -p[topax]] [-d] <src> ... <dst>]
+	[-createSnapshot <snapshotDir> [<snapshotName>]]
+	[-deleteSnapshot <snapshotDir> <snapshotName>]
+	[-df [-h] [<path> ...]]
+	[-du [-s] [-h] [-v] [-x] <path> ...]
+	[-expunge [-immediate] [-fs <path>]]
+	[-find <path> ... <expression> ...]
+	[-get [-f] [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-getfacl [-R] <path>]
+	[-getfattr [-R] {-n name | -d} [-e en] <path>]
+	[-getmerge [-nl] [-skip-empty-file] <src> <localdst>]
+	[-head <file>]
+	[-help [cmd ...]]
+	[-ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [-e] [<path> ...]]
+	[-mkdir [-p] <path> ...]
+	[-moveFromLocal <localsrc> ... <dst>]
+	[-moveToLocal <src> <localdst>]
+	[-mv <src> ... <dst>]
+	[-put [-f] [-p] [-l] [-d] <localsrc> ... <dst>]
+	[-renameSnapshot <snapshotDir> <oldName> <newName>]
+	[-rm [-f] [-r|-R] [-skipTrash] [-safely] <src> ...]
+	[-rmdir [--ignore-fail-on-non-empty] <dir> ...]
+	[-setfacl [-R] [{-b|-k} {-m|-x <acl_spec>} <path>]|[--set <acl_spec> <path>]]
+	[-setfattr {-n name [-v value] | -x name} <path>]
+	[-setrep [-R] [-w] <rep> <path> ...]
+	[-stat [format] <path> ...]
+	[-tail [-f] [-s <sleep interval>] <file>]
+	[-test -[defswrz] <path>]
+	[-text [-ignoreCrc] <src> ...]
+	[-touch [-a] [-m] [-t TIMESTAMP ] [-c] <path> ...]
+	[-touchz <path> ...]
+	[-truncate [-w] <length> <path> ...]
+	[-usage [cmd ...]]
+
+Generic options supported are:
+-conf <configuration file>        specify an application configuration file
+-D <property=value>               define a value for a given property
+-fs <file:///|hdfs://namenode:port> specify default filesystem URL to use, overrides 'fs.defaultFS' property from configurations.
+-jt <local|resourcemanager:port>  specify a ResourceManager
+-files <file1,...>                specify a comma-separated list of files to be copied to the map reduce cluster
+-libjars <jar1,...>               specify a comma-separated list of jar files to be included in the classpath
+-archives <archive1,...>          specify a comma-separated list of archives to be unarchived on the compute machines
+
+The general command line syntax is:
+command [genericOptions] [commandOptions]
+
+Usage: hadoop fs [generic options] -ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [-e] [<path> ...]
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls -h -ltr data/results[C[C[1P data/results[1P data/results[1P data/results[1P data/results[1Pdata/results[1P data/results[1P data/results[1Pdata/results
+-rw-r--r--   3 itv011398 supergroup         95 2025-01-13 00:31 data/results
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls data/results[K[K[K[K[K[K[K[K[K[K[K[K
+Found 1 items
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:31 data
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls data
+Found 3 items
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:27 data/landing
+-rw-r--r--   3 itv011398 supergroup         95 2025-01-13 00:31 data/results
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:27 data/staging
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls data/landing
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls data/landing[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K-R data
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:27 data/landing
+-rw-r--r--   3 itv011398 supergroup         95 2025-01-13 00:31 data/results
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:27 data/staging
+-rwxrw-r--   3 itv011398 supergroup     735626 2025-01-13 00:22 data/staging/orders_filtered.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls -R datadata/landing[K[Kdata/results-h -ltr data/results[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1PR[C[C[C[C[C[C[C[C[C[C[C[C[Cr[C[C[C[C[C[C[C[C[C[C[C[C[C[14@order_result.csv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2Pput[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+put: `data/results': File exists
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -put order_result.csv data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1P data/results[1Pdata/results[1P data/results[1P data/results[1P data/resultsc data/resultsa data/resultsr data/results
+-car: Unknown command
+Usage: hadoop fs [generic options]
+	[-appendToFile <localsrc> ... <dst>]
+	[-cat [-ignoreCrc] <src> ...]
+	[-checksum [-v] <src> ...]
+	[-chgrp [-R] GROUP PATH...]
+	[-chmod [-R] <MODE[,MODE]... | OCTALMODE> PATH...]
+	[-chown [-R] [OWNER][:[GROUP]] PATH...]
+	[-copyFromLocal [-f] [-p] [-l] [-d] [-t <thread count>] <localsrc> ... <dst>]
+	[-copyToLocal [-f] [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-count [-q] [-h] [-v] [-t [<storage type>]] [-u] [-x] [-e] <path> ...]
+	[-cp [-f] [-p | -p[topax]] [-d] <src> ... <dst>]
+	[-createSnapshot <snapshotDir> [<snapshotName>]]
+	[-deleteSnapshot <snapshotDir> <snapshotName>]
+	[-df [-h] [<path> ...]]
+	[-du [-s] [-h] [-v] [-x] <path> ...]
+	[-expunge [-immediate] [-fs <path>]]
+	[-find <path> ... <expression> ...]
+	[-get [-f] [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-getfacl [-R] <path>]
+	[-getfattr [-R] {-n name | -d} [-e en] <path>]
+	[-getmerge [-nl] [-skip-empty-file] <src> <localdst>]
+	[-head <file>]
+	[-help [cmd ...]]
+	[-ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [-e] [<path> ...]]
+	[-mkdir [-p] <path> ...]
+	[-moveFromLocal <localsrc> ... <dst>]
+	[-moveToLocal <src> <localdst>]
+	[-mv <src> ... <dst>]
+	[-put [-f] [-p] [-l] [-d] <localsrc> ... <dst>]
+	[-renameSnapshot <snapshotDir> <oldName> <newName>]
+	[-rm [-f] [-r|-R] [-skipTrash] [-safely] <src> ...]
+	[-rmdir [--ignore-fail-on-non-empty] <dir> ...]
+	[-setfacl [-R] [{-b|-k} {-m|-x <acl_spec>} <path>]|[--set <acl_spec> <path>]]
+	[-setfattr {-n name [-v value] | -x name} <path>]
+	[-setrep [-R] [-w] <rep> <path> ...]
+	[-stat [format] <path> ...]
+	[-tail [-f] [-s <sleep interval>] <file>]
+	[-test -[defswrz] <path>]
+	[-text [-ignoreCrc] <src> ...]
+	[-touch [-a] [-m] [-t TIMESTAMP ] [-c] <path> ...]
+	[-touchz <path> ...]
+	[-truncate [-w] <length> <path> ...]
+	[-usage [cmd ...]]
+
+Generic options supported are:
+-conf <configuration file>        specify an application configuration file
+-D <property=value>               define a value for a given property
+-fs <file:///|hdfs://namenode:port> specify default filesystem URL to use, overrides 'fs.defaultFS' property from configurations.
+-jt <local|resourcemanager:port>  specify a ResourceManager
+-files <file1,...>                specify a comma-separated list of files to be copied to the map reduce cluster
+-libjars <jar1,...>               specify a comma-separated list of jar files to be included in the classpath
+-archives <archive1,...>          specify a comma-separated list of archives to be unarchived on the compute machines
+
+The general command line syntax is:
+command [genericOptions] [commandOptions]
+
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -car data/results[C[1P data/resultst data/results
+3617,2013-08-1500:00:00.0,8889,PENDING_PAYMENT
+68714,2013-09-0600:00:00.0,8889,PENDING_PAYMENT
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -cat data/results[C[1P data/results[1P data/results[1P data/resultsr data/resultsm data/results
+2025-01-13 00:39:55,383 INFO fs.TrashPolicyDefault: Moved: 'hdfs://m01.itversity.com:9000/user/itv011398/data/results' to trash at: hdfs://m01.itversity.com:9000/user/itv011398/.Trash/Current/user/itv011398/data/results
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -rm data/results[1@cat[C[C[C[C[C[C[C[C[C[C[C[C[Cr[C[C[C[C[C[C[C[C[C[C[C[C[C[17@put order_result.csv[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -R data[K
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:27 data/landing
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:27 data/staging
+-rwxrw-r--   3 itv011398 supergroup     735626 2025-01-13 00:22 data/staging/orders_filtered.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls -R datarm data/results[1@cat[C[C[C[C[C[C[C[C[C[C[C[C[Cr[C[C[C[C[C[C[C[C[C[C[C[C[C[17@put order_result.csv[C[C[C[C[C[C[C[C[C[C[C[C[C/
+put: `data/results/': No such file or directory: `hdfs://m01.itversity.com:9000/user/itv011398/data/results'
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -mkdir -p data/results
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -mkdir -p data/resultsput order_result.csv data/results/
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -put order_result.csv data/results/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[13Pmkdir -p data/resultsput order_result.csv data/results/[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls -R data[K
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:27 data/landing
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:41 data/results
+-rw-r--r--   3 itv011398 supergroup         95 2025-01-13 00:41 data/results/order_result.csv
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:27 data/staging
+-rwxrw-r--   3 itv011398 supergroup     735626 2025-01-13 00:22 data/staging/orders_filtered.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ mkdir data/results
+mkdir: cannot create directory ‘data/results’: No such file or directory
+]0;itv011398@g02:~[itv011398@g02 ~]$ mkdir data/results-data/resultspdata/results data/results
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -get /user/itv000173/data/results/orders_result.csv /home/itv000173/ data/results
+get: `/home/itv000173/data/results': No such file or directory: `file:///home/itv000173/data/results'
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -get /user/itv000173/data/results/orders_result.csv /home/itv000173/ddata/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/da[1Pta/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/dat[1Pa/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data[1P/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/[1Presults[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/r[1Pesults[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C1/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C1/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C9/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C8/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CD/data/resultsD/data/results[CD/data/results[C[CD/data/results[C[C[CD/data/results[C[C[C[CD/data/results[C[C[C[C[CD/data/results[C[C[C[C[C[C[1P/data/results[C[C[C[C[C[1P/data/results[C[C[C[C[1P/data/results[C[C[C[1P/data/results[C[C[1P/data/results[C[1P/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/d[1Pata/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/da[1Pta/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/dat[1Pa/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C9/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C8/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CD/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/d[1Pata/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci/data/resultst/data/results[Cv/data/results[C[C0/data/results[C[C[C1/data/results[C[C[C[C1/data/results[C[C[C[C[C3/data/results[C[C[C[C[C[C9/data/results[C[C[C[C[C[C[C8/data/results[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[C[C[C[C[C[C[1P/data/results[C[C[C[C[C[C[C[1P/data/results[C[C[C[C[C[C[1P/data/results[C[C[C[C[C[1P/data/results[C[C[C[C[1P/data/results[C[C[C[1P/data/results[C[C[1P/data/results[C[1P/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/d[1Pata/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Citv000173/data/results/orders_result.csv /home/itv011398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ctitv000173/data/results/orders_result.csv /home/itv011398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cvitv000173/data/results/orders_result.csv /home/itv011398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C0itv000173/data/results/orders_result.csv /home/itv011398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C1itv000173/data/results/orders_result.csv /home/itv011398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C1itv000173/data/results/orders_result.csv /home/itv011398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3itv000173/data/results/orders_result.csv /home/itv0[C1398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C9itv000173/data/results/orders_result.csv /home/itv011398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C8itv000173/data/results/orders_result.csv /home/itv011398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ctv000173/data/results/orders_result.csv /home/itv[1P011398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cv000173/data/results/orders_result.csv /home/itv0[1P11398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C000173/data/results/orders_result.csv /home/itv01[C[1P398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C173/data/results/orders_result.csv /home/itv011[1P398/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C173/data/results/orders_result.csv /home/itv0113[1P98/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C173/data/results/orders_result.csv /home/itv01139[1P8/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C73/data/results/orders_result.csv /home/itv011398[1P/data/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C3/data/results/orders_result.csv /home/itv011398/[1Pdata/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/results/orders_result.csv /home/itv011398/d[1Pata/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+get: `/user/itv011398/data/results/orders_result.csv': No such file or directory
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -get /user/itv011398/data/results/orders_result.csv /home/itv011398/ddata/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/da[1Pta/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/dat[1Pa/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data[1P/results[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/[1Presults[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/r[1Pesults[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/re[1Psults[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/res[1Pults[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/resu[1Plts[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/resul[1Pts[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdata/result[1Ps[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/results[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/data/results [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P/data/results
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P/data/results[1Pdata/results
+get: `/user/itv011398/data/results/orders_result.csv': No such file or directory
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -get /user/itv011398/data/results/orders_result.csv /data/results[C[C[C[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P /data/results[1P/data/results[1Pdata/results[1Pata/results[1Pta/results[1Pa/results[1P/results[1Presults[1Pesults[1Psults[1Pults[1Plts[1Pts[1Ps[Khadoop fs -get /user/itv000173/data/results[1P/data/results[1P/data/results[1P/data/results[1P/data/results[1P/data/results1/data/results1/data/results3/data/results9/data/results8/data/results[C= /user/itv011398/data/results= /user/itv011398/data/results[1P /user/itv011398/data/results[1P /user/itv011398/data/results[1P /user/itv011398/data/results[1P /user/itv011398/data/results[1P /user/itv011398/data/resultsl /user/itv011398/data/resultss /user/itv011398/data/results
+Found 1 items
+-rw-r--r--   3 itv011398 supergroup         95 2025-01-13 00:41 /user/itv011398/data/results/order_result.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls /user/itv011398/data/results/p[Korder_result.csv [C[1@D[1@D[1@D[1@D[1P[1P[1P[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C / h o m e / i t v 0 1 1 3 9 8 / d  [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ca  t a / r e s u l t s / [1P / [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C /user/itv011398/data/results/order_result.csv /home/itv011398/data[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C /user/itv011398/data/results/order_result.csv /home/itv011398/data/[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cg /user/itv011398/data/results/order_result.csv /home/itv011398/data[1@/[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ce /user/itv011398/data/results/order_result.csv /home/itv011398/dat[1@a[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ct /user/itv011398/data/results/order_result.csv /home/itv011398/da[1@t[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+]0;itv011398@g02:~[itv011398@g02 ~]$ ls /data/results
+ls: cannot access /data/results: No such file or directory
+]0;itv011398@g02:~[itv011398@g02 ~]$ ls /data/results/
+ls: cannot access /data/results/: No such file or directory
+]0;itv011398@g02:~[itv011398@g02 ~]$ ls
+[0m[01;34mdata[0m  [01;34mlanding[0m  order_result.csv  [01;34mproduct[0m  session_hadoop.log  [01;34mstaging[0m
+]0;itv011398@g02:~[itv011398@g02 ~]$ ls data
+[0m[01;34mresults[0m
+]0;itv011398@g02:~[itv011398@g02 ~]$ ls data/results
+order_result.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ ls data/results/*
+data/results/order_result.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ ls data/results/*[C data/results/*- data/results/*h data/results/*[C data/results/*
+data/results/order_result.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ rm -R landing
+]0;itv011398@g02:~[itv011398@g02 ~]$ rm -R landing[K[K[K[K[K[K[Kstaging
+]0;itv011398@g02:~[itv011398@g02 ~]$ rm -R staging[K[K[K[K[K[K[Kdata
+]0;itv011398@g02:~[itv011398@g02 ~]$ ls -ltr
+total 68
+drwxr-xr-x 3 itv011398 students  4096 Jan  7 23:02 [0m[01;34mproduct[0m
+-rw-r--r-- 1 itv011398 students    95 Jan 13 00:29 order_result.csv
+-rw-r--r-- 1 itv011398 students 57344 Jan 13 00:45 session_hadoop.log
+]0;itv011398@g02:~[itv011398@g02 ~]$ rm order_result.csv
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -rm -R
+-rm: Not enough arguments: expected 1 but got 0
+Usage: hadoop fs [generic options]
+	[-appendToFile <localsrc> ... <dst>]
+	[-cat [-ignoreCrc] <src> ...]
+	[-checksum [-v] <src> ...]
+	[-chgrp [-R] GROUP PATH...]
+	[-chmod [-R] <MODE[,MODE]... | OCTALMODE> PATH...]
+	[-chown [-R] [OWNER][:[GROUP]] PATH...]
+	[-copyFromLocal [-f] [-p] [-l] [-d] [-t <thread count>] <localsrc> ... <dst>]
+	[-copyToLocal [-f] [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-count [-q] [-h] [-v] [-t [<storage type>]] [-u] [-x] [-e] <path> ...]
+	[-cp [-f] [-p | -p[topax]] [-d] <src> ... <dst>]
+	[-createSnapshot <snapshotDir> [<snapshotName>]]
+	[-deleteSnapshot <snapshotDir> <snapshotName>]
+	[-df [-h] [<path> ...]]
+	[-du [-s] [-h] [-v] [-x] <path> ...]
+	[-expunge [-immediate] [-fs <path>]]
+	[-find <path> ... <expression> ...]
+	[-get [-f] [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-getfacl [-R] <path>]
+	[-getfattr [-R] {-n name | -d} [-e en] <path>]
+	[-getmerge [-nl] [-skip-empty-file] <src> <localdst>]
+	[-head <file>]
+	[-help [cmd ...]]
+	[-ls [-C] [-d] [-h] [-q] [-R] [-t] [-S] [-r] [-u] [-e] [<path> ...]]
+	[-mkdir [-p] <path> ...]
+	[-moveFromLocal <localsrc> ... <dst>]
+	[-moveToLocal <src> <localdst>]
+	[-mv <src> ... <dst>]
+	[-put [-f] [-p] [-l] [-d] <localsrc> ... <dst>]
+	[-renameSnapshot <snapshotDir> <oldName> <newName>]
+	[-rm [-f] [-r|-R] [-skipTrash] [-safely] <src> ...]
+	[-rmdir [--ignore-fail-on-non-empty] <dir> ...]
+	[-setfacl [-R] [{-b|-k} {-m|-x <acl_spec>} <path>]|[--set <acl_spec> <path>]]
+	[-setfattr {-n name [-v value] | -x name} <path>]
+	[-setrep [-R] [-w] <rep> <path> ...]
+	[-stat [format] <path> ...]
+	[-tail [-f] [-s <sleep interval>] <file>]
+	[-test -[defswrz] <path>]
+	[-text [-ignoreCrc] <src> ...]
+	[-touch [-a] [-m] [-t TIMESTAMP ] [-c] <path> ...]
+	[-touchz <path> ...]
+	[-truncate [-w] <length> <path> ...]
+	[-usage [cmd ...]]
+
+Generic options supported are:
+-conf <configuration file>        specify an application configuration file
+-D <property=value>               define a value for a given property
+-fs <file:///|hdfs://namenode:port> specify default filesystem URL to use, overrides 'fs.defaultFS' property from configurations.
+-jt <local|resourcemanager:port>  specify a ResourceManager
+-files <file1,...>                specify a comma-separated list of files to be copied to the map reduce cluster
+-libjars <jar1,...>               specify a comma-separated list of jar files to be included in the classpath
+-archives <archive1,...>          specify a comma-separated list of archives to be unarchived on the compute machines
+
+The general command line syntax is:
+command [genericOptions] [commandOptions]
+
+Usage: hadoop fs [generic options] -rm [-f] [-r|-R] [-skipTrash] [-safely] <src> ...
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -rm -R data/*
+2025-01-13 00:48:40,360 INFO fs.TrashPolicyDefault: Moved: 'hdfs://m01.itversity.com:9000/user/itv011398/data/landing' to trash at: hdfs://m01.itversity.com:9000/user/itv011398/.Trash/Current/user/itv011398/data/landing
+2025-01-13 00:48:40,379 INFO fs.TrashPolicyDefault: Moved: 'hdfs://m01.itversity.com:9000/user/itv011398/data/results' to trash at: hdfs://m01.itversity.com:9000/user/itv011398/.Trash/Current/user/itv011398/data/results1736747320366
+2025-01-13 00:48:40,427 INFO fs.TrashPolicyDefault: Moved: 'hdfs://m01.itversity.com:9000/user/itv011398/data/staging' to trash at: hdfs://m01.itversity.com:9000/user/itv011398/.Trash/Current/user/itv011398/data/staging
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -rm -R data/*[K[K[K[K[K[K[K[K[K[K[K[Kls
+Found 2 items
+drwx------   - itv011398 supergroup          0 2025-01-13 00:39 .Trash
+drwxr-xr-x   - itv011398 supergroup          0 2025-01-13 00:48 data
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls data
+]0;itv011398@g02:~[itv011398@g02 ~]$ hadoop fs -ls data[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kexit
+exit
+
+Script done on Mon 13 Jan 2025 12:49:21 AM EST
