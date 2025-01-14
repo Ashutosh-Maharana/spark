@@ -11,8 +11,7 @@ Script started on Mon 13 Jan 2025 12:14:12 AM EST
 /home/itv011398
 ]0;itv011398@g02:~ [itv011398@g02 ~]$ mkdir landing
 ]0;itv011398@g02:~ [itv011398@g02 ~]$ mkdir staging
-]0;itv011398@g02:~ [itv011398@g02 ~]$ ls
-[0m[01;34mlanding[0m  [01;34mproduct[0m  session_hadoop.log  [01;34mstaging[0m
+
 ]0;itv011398@g02:~ [itv011398@g02 ~]$ cp /data/retail_db/orders/part-00000 landing
 ]0;itv011398@g02:~ [itv011398@g02 ~]$ cd /landing
 bash: cd: /landing: No such file or directory
